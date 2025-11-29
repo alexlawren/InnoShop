@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+
+  postgres_db:
+    image: postgres:15
+    container_name: innoshop_db_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5435:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  innoshop.userapi:
+    image: ${DOCKER_REGISTRY-}innoshopuserapi
+    container_name: innoshop_user_api
+    build:
+      context: .
+      dockerfile: InnoShop.UserApi/Dockerfile
+    ports:
+      - "7001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres_db;Port=5432;Database=inno_shop_users;Username=postgres;Password=postgres123
+      - ApiClients__ProductApiUrl=http://innoshop.productapi:8080
+      - JwtSettings__Secret=secretkeysecretkeysecretkeysecretkeysecretkeysecretkey
+      - JwtSettings__Issuer=InnoShop.UserApi
+      - JwtSettings__Audience=InnoShop.Client
+      - ClientSettings__BaseUrl=http://localhost:4200
+      - ApiSettings__BaseUrl=http://localhost:7001
+      
+      - EmailSettings__SmtpServer=smtp.gmail.com
+      - EmailSettings__Port=587
+      - EmailSettings__From=alexlawr300@gmail.com
+      - EmailSettings__Username=alexlawr300@gmail.com
+      - EmailSettings__Password=qkrybsoworjzwgxr
+    depends_on:
+      - postgres_db
+    dns:
+     - 8.8.8.8
+     - 8.8.4.4
+
+  innoshop.productapi:
+    image: ${DOCKER_REGISTRY-}innoshopproductapi
+    container_name: innoshop_product_api
+    build:
+      context: .
+      dockerfile: InnoShop.ProductApi/Dockerfile
+    ports:
+      - "7002:8080" 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres_db;Port=5432;Database=inno_shop_products;Username=postgres;Password=postgres123
+      - JwtSettings__Secret=secretkeysecretkeysecretkeysecretkeysecretkeysecretkey
+      - JwtSettings__Issuer=InnoShop.UserApi
+      - JwtSettings__Audience=InnoShop.Client
+    depends_on:
+      - postgres_db
+
+  frontend:
+    image: innoshop-frontend
+    container_name: innoshop_frontend_container
+    build:
+      context: ./innoshop-web  
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80" 
+    depends_on:
+      - innoshop.productapi
+      - innoshop.userapi
+
+volumes:
+  postgres_data:
