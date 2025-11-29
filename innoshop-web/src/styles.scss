@@ -1,0 +1,220 @@
+:root {
+  --primary-red: #D32F2F;     
+  --primary-red-hover: #B71C1C;
+  --bg-color: #F5F7FA;         
+  --text-dark: #2C3E50;        
+  --white: #FFFFFF;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #eceff1 0%, #ffffff 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 40px 30px;
+  border-top: 6px solid var(--primary-red);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 
+              0px 6px 10px 0px rgba(0, 0, 0, 0.14), 
+              0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  .logo-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: var(--primary-red);
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark);
+  }
+
+  p {
+    margin: 5px 0 0;
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 15px; 
+}
+
+.login-btn {
+  width: 100%;
+  height: 50px !important;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  background-color: var(--primary-red) !important;
+  color: white !important;
+
+  &:disabled {
+    background-color: var(--primary-red) !important;
+    color: white !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.error-alert {
+  background-color: #FDEDEC;
+  color: var(--primary-red);
+  border: 1px solid #F5B7B1;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+
+  mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.footer-links {
+  margin-top: 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.link-btn {
+  color: var(--primary-red);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  border-bottom: 1px dashed transparent;
+
+  &:hover {
+    color: var(--primary-red-hover);
+    border-bottom-color: var(--primary-red-hover);
+  }
+}
+
+.bold {
+  font-weight: 600;
+}
+
+input.mat-mdc-input-element {
+  padding: 0 12px !important; 
+}
+
+.mat-mdc-form-field-text-prefix {
+  padding-left: 8px !important;  
+  padding-right: 4px !important; 
+  color: #7f8c8d;
+  align-self: center;
+  display: flex;                  
+  align-items: center;          
+}
+
+.mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+  padding-left: 12px !important;  
+  padding-right: 12px !important; 
+}
+
+.mat-mdc-text-prefix {
+  padding-left: 8px !important;
+  padding-right: 4px !important;
+  color: #7f8c8d;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+.success-snackbar, .error-snackbar {
+  margin-top: 24px !important;
+  max-width: none !important;
+
+  .mdc-snackbar__surface {
+    width: 100% !important;
+    min-width: 300px !important;
+    max-width: 600px !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important; 
+    justify-content: center !important; 
+  }
+
+  .mdc-snackbar__label {
+    flex-grow: 1 !important; 
+    width: auto !important; 
+    white-space: normal !important;
+    overflow: visible !important;
+    
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    padding: 0 !important;
+    margin: 0 !important; 
+    text-align: center !important; 
+    
+    color: #ffffff !important;
+  }
+  
+  .mat-mdc-snack-bar-actions {
+    display: none !important;
+  }
+}
+
+.success-snackbar {
+  --mdc-snackbar-container-color: #2e7d32; 
+  .mdc-snackbar__surface { background-color: #2e7d32 !important; }
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #d32f2f;
+  .mdc-snackbar__surface { background-color: #d32f2f !important; }
+}

@@ -1,0 +1,96 @@
+<div class="main-container">
+  
+  <div class="page-header">
+    <div>
+      <h1>Товары</h1>
+      <p class="subtitle">Управление каталогом продукции</p>
+    </div>
+    <button mat-flat-button color="primary" class="add-btn" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon> ДОБАВИТЬ ТОВАР
+    </button>
+  </div>
+
+    <div class="filters-card mat-elevation-z2">
+    
+    <div class="filter-inputs">
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Поиск по названию</mat-label>
+        <input matInput [(ngModel)]="searchText" (keyup.enter)="onSearch()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="price-input">
+        <mat-label>Мин. цена</mat-label>
+        <input matInput type="number" [(ngModel)]="minPrice" min="0">
+        <span matTextPrefix>$</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="price-input">
+        <mat-label>Макс. цена</mat-label>
+        <input matInput type="number" [(ngModel)]="maxPrice" min="0">
+        <span matTextPrefix>$&nbsp;</span>
+      </mat-form-field>
+    </div>
+
+    <div class="filter-buttons">
+      <button mat-flat-button color="primary" (click)="onSearch()" class="action-btn">
+        <mat-icon>search</mat-icon> НАЙТИ
+      </button>
+      
+      <button mat-stroked-button color="warn" (click)="clearFilters()" class="action-btn">
+        <mat-icon>refresh</mat-icon> СБРОС
+      </button>
+    </div>
+
+  </div>
+
+  <div class="table-wrapper mat-elevation-z8">
+    
+    <div class="loading-shade" *ngIf="isLoading">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+
+    <table mat-table [dataSource]="products">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Название </th>
+        <td mat-cell *matCellDef="let product" class="fw-bold"> {{product.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Цена </th>
+        <td mat-cell *matCellDef="let product" class="price-cell"> 
+          {{product.price | currency:'USD':'symbol':'1.2-2'}} 
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Описание </th>
+        <td mat-cell *matCellDef="let product" class="desc-cell"> {{product.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions-header"> Действия </th>
+        <td mat-cell *matCellDef="let product" class="actions-cell">
+          <button mat-icon-button color="primary" matTooltip="Редактировать" (click)="openEditDialog(product)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" matTooltip="Удалить" (click)="deleteProduct(product)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+    </table>
+
+    <mat-paginator 
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25]"
+      (page)="onPageChange($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

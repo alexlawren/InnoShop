@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Редактировать товар' : 'Новый товар' }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="product-form">
+    
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Название</mat-label>
+      <input matInput formControlName="name" placeholder="Например, iPhone 15">
+      <mat-error *ngIf="form.get('name')?.hasError('required')">Название обязательно</mat-error>
+      <mat-error *ngIf="form.get('name')?.hasError('maxlength')">Максимум 100 символов</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Цена</mat-label>
+      <input matInput type="number" formControlName="price" min="0">
+      <span matTextPrefix>$</span>
+      <mat-error *ngIf="form.get('price')?.hasError('required')">Цена обязательна</mat-error>
+      <mat-error *ngIf="form.get('price')?.hasError('min')">Цена должна быть больше 0</mat-error>
+      <mat-error *ngIf="form.get('price')?.hasError('pattern')">Максимум 2 знака после запятой</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Описание</mat-label>
+      <textarea matInput formControlName="description" rows="3"></textarea>
+      <mat-error *ngIf="form.get('description')?.hasError('required')">Описание обязательно</mat-error>
+    </mat-form-field>
+
+    <div class="checkbox-row">
+      <mat-checkbox formControlName="isAvailable" color="primary">Доступен для продажи</mat-checkbox>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-flat-button type="submit" (click)="onSave()" [disabled]="form.invalid">
+    {{ isEditMode ? 'Сохранить' : 'Создать' }}
+  </button>
+</mat-dialog-actions>

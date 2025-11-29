@@ -1,0 +1,43 @@
+mat-toolbar {
+  background-color: var(--primary-red) !important; 
+  color: white !important; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 18px;
+  color: white; 
+  
+  mat-icon {
+    margin-right: 5px;
+  }
+}
+
+.nav-links {
+  margin-left: 20px;
+  
+  a {
+    color: rgba(255, 255, 255, 0.85); 
+    text-decoration: none;
+    font-weight: 500;
+    
+    &.active-link {
+      color: white;
+      background: rgba(255, 255, 255, 0.2); 
+    }
+
+    &:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+button {
+  color: white !important;
+}

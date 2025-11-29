@@ -1,0 +1,24 @@
+<mat-toolbar color="primary" *ngIf="authService.isAuth()">
+  
+  <button mat-button routerLink="/products" class="logo">
+    <mat-icon>storefront</mat-icon>
+    InnoShop
+  </button>
+
+  <nav class="nav-links">
+    <a mat-button routerLink="/products" routerLinkActive="active-link">
+      Товары
+    </a>
+    <a mat-button routerLink="/users" routerLinkActive="active-link">
+      Пользователи
+    </a>
+  </nav>
+
+  <span class="spacer"></span>
+
+  <button mat-button (click)="onLogout()">
+    <mat-icon>logout</mat-icon>
+    Выйти
+  </button>
+
+</mat-toolbar>

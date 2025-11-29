@@ -1,0 +1,72 @@
+.main-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 25px;
+  h1 { font-size: 32px; margin: 0; font-weight: 700; }
+  .subtitle { color: #7f8c8d; margin: 5px 0 0; }
+}
+
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  th.mat-mdc-header-cell {
+    background-color: var(--primary-red);
+    color: white;
+    font-weight: 600;
+    padding: 16px;
+  }
+  td.mat-mdc-cell {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+.fw-bold { font-weight: 600; }
+.actions-cell { text-align: right; }
+
+
+.mat-mdc-standard-chip {
+  --mdc-chip-label-text-color: #555;
+  background-color: #eee !important; 
+}
+
+.admin-chip {
+  background-color: #FFF3E0 !important; 
+  --mdc-chip-label-text-color: #E65100 !important; 
+  border: 1px solid #FFB74D;
+}
+
+.mat-column-name {
+  width: 20%; 
+}
+
+.mat-column-email {
+  width: 25%;
+}
+
+.mat-column-role {
+  width: 15%;
+  min-width: 100px;
+}
+
+
+.mat-column-status {
+  width: 200px; 
+  min-width: 200px; 
+
+}
+
+
+.mat-column-actions {
+  width: 80px;
+  text-align: right; 
+}
