@@ -60,7 +60,7 @@
 
 ```bash
 
-git clone <ссылка\_на\_твой\_репозиторий>
+git clone <https://github.com/alexlawren/InnoShop>
 
 cd InnoShop
 
